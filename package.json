@@ -1,10 +1,9 @@
 {
   "name": "otasoft-ml",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
-  "private": true,
-  "license": "UNLICENSED",
+  "description": "Machine Learning module for Otasoft",
+  "author": "Jakub Andrzejewski",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
