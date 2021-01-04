@@ -11,7 +11,7 @@ export class AppController {
   }
 
   @Get('/tensorflow-test')
-  testTensorFlow() {
-    return this.appService.testTensorFlow();
+  async testTensorflow() {
+    return await this.appService.testTensorflow();
   }
 }
