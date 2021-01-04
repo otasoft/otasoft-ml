@@ -70,4 +70,22 @@ export class AppService {
       }
     });
   }
+
+  async trainModel(model: tf.Sequential, inputs, labels) {
+    // Prepare model for training
+    model.compile({
+      optimizer: tf.train.adam(),
+      loss: tf.losses.meanSquaredError,
+      metrics: ['mse'],
+    });
+
+    const batchSize = 32;
+    const epochs = 50;
+
+    return await model.fit(inputs, labels, {
+      batchSize,
+      epochs,
+      shuffle: true,
+    })
+  }
 }
