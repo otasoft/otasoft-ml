@@ -1,4 +1,5 @@
 import { HttpService, Injectable } from '@nestjs/common';
+import * as tf from '@tensorflow/tfjs-node';
 
 @Injectable()
 export class AppService {
@@ -23,5 +24,17 @@ export class AppService {
       .filter(car => (car.mpg != null && car.horsepower != null));
 
       return cleaned;
+  }
+
+  createTensorflowModel() {
+    const model = tf.sequential();
+
+    // add input layer
+    model.add(tf.layers.dense({ inputShape: [1], units: 1, useBias: true }));
+
+    // add output layer
+    model.add(tf.layers.dense({ units: 1, useBias: true }));
+
+    return model;
   }
 }
