@@ -18,7 +18,7 @@ export class AppService {
 
     const { inputs, labels } = carsDataToTensor;
 
-    this.trainModel(tensorflowModel, inputs, labels);
+    await this.trainModel(tensorflowModel, inputs, labels);
 
     const testedModel = this.testModel(
       tensorflowModel,
@@ -59,38 +59,34 @@ export class AppService {
 
   convertDataToTensor(data) {
     return tf.tidy(() => {
-      // 1. Shuffle the data
+      // Step 1. Shuffle the data    
       tf.util.shuffle(data);
-
-      // 2. Convert data to Tensor
-      const inputs = data.map((d) => d.horsepower);
-      const labels = data.map((d) => d.mpg);
-
+  
+      // Step 2. Convert data to Tensor
+      const inputs = data.map(d => d.horsepower)
+      const labels = data.map(d => d.mpg);
+  
       const inputTensor = tf.tensor2d(inputs, [inputs.length, 1]);
       const labelTensor = tf.tensor2d(labels, [labels.length, 1]);
-
-      // 3. Normalize the data to the range 0-1
+  
+      //Step 3. Normalize the data to the range 0 - 1 using min-max scaling
       const inputMax = inputTensor.max();
-      const inputMin = inputTensor.min();
+      const inputMin = inputTensor.min();  
       const labelMax = labelTensor.max();
       const labelMin = labelTensor.min();
-
-      const normalizedInputs = inputTensor
-        .sub(inputMin)
-        .div(inputMax.sub(inputMin));
-      const normalizedLabels = labelTensor
-        .sub(labelMin)
-        .sub(labelMax.sub(labelMin));
-
-      // 4. Return all Tensor data
+  
+      const normalizedInputs = inputTensor.sub(inputMin).div(inputMax.sub(inputMin));
+      const normalizedLabels = labelTensor.sub(labelMin).div(labelMax.sub(labelMin));
+  
       return {
         inputs: normalizedInputs,
         labels: normalizedLabels,
+        // Return the min/max bounds so we can use them later.
         inputMax,
         inputMin,
         labelMax,
         labelMin,
-      };
+      }
     });
   }
 
