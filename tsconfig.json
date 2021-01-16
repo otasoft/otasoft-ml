@@ -13,6 +13,5 @@
     "incremental": true,
     // For errors during TensorFlow compilation
     "skipLibCheck": true,
-    "exclude": ["client"],
   }
 }
