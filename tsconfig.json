@@ -12,6 +12,7 @@
     "baseUrl": "./",
     "incremental": true,
     // For errors during TensorFlow compilation
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "exclude": ["client"],
   }
 }
