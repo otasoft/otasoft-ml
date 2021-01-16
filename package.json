@@ -24,7 +24,7 @@
     "@nestjs/core": "^7.0.0",
     "@nestjs/platform-express": "^7.0.0",
     "@nestjs/serve-static": "^2.1.4",
-    "@tensorflow/tfjs": "^2.8.2",
+    "@tensorflow/tfjs": "^2.8.4",
     "@tensorflow/tfjs-node": "^2.8.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
